@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name='viewport'
+      content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#ffc40d">
+<meta name="theme-color" content="#ffffff">
+    
+    <title>Rafiki Systems</title>
+    
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+            font-size: 100%;
+ font-family: Arial;
+            
+        }
+        body, html {
+            background: #1378BE;
+            width:  100%;
+            height: 100%;
+        }
+        #main {
+            position: fixed;
+            width: 100%;
+            left: 50%;
+            top: 0px;
+            margin-left: -50%;
+            font-size: 1.5em;
+            background: #EEE;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0px 0px 100px rgb(0,0,0,.2);
+        }
+        #content.shrink {
+            position: absolute;
+            top: 10%;
+            left: 0%;
+            height: 90%;
+        }
+        #content {
+            position: absolute;
+            top: 20%;
+            left: 0%;
+            height: 80%;
+            width: 100%;
+            transition: top .3s;
+        }
+        #logo.shrink {
+            max-height: 10%;
+            height: 10%;
+            width: 100%;
+            background: #EEE;
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            justify-content:space-around;
+            
+        }
+        #logo {
+            max-height: 20%;
+            height: 20%;
+            width: 100%;
+            background: #EEE;
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            justify-content:space-around;
+            transition: max-height .3s;
+        }
+        #logo img {
+            max-height: 95%; 
+            width:auto;
+            margin: auto;
+            transition: max-height .3s;
+        }
+        #logo.shrink img {
+            max-height: 96%;
+        }
+
+        p,h2 {
+            margin-top: 1em;
+        }
+        li
+        {
+            margin-left: 2em;
+        }
+        
+        #tabs {
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-flex-wrap: wrap;
+              -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 4px;
+            
+            }
+
+        #tabs.shrink label {
+            padding: 0;
+        }
+        #tabs label {
+              -webkit-box-ordinal-group: 2;
+              -webkit-order: 1;
+              -ms-flex-order: 1;
+              order: 1;
+              display: block;
+                margin: 3px;
+                box-shadow: 5px 5px 8px rgb(0,0,0,.2);
+              padding: 1rem;
+                flex-grow: 1;
+                text-align: center;
+              cursor: pointer;
+              background: black;
+                color: grey;
+              font-weight: bold;
+              -webkit-transition: background ease 0.2s;
+              transition: transform ease 0.2s, box-shadow ease .2s;
+            }
+
+            #tabs .tab {
+              -webkit-box-ordinal-group: 100;
+              -webkit-order: 99;
+              -ms-flex-order: 99;
+              order: 99;
+              -webkit-box-flex: 1;
+              -webkit-flex-grow: 1;
+              -ms-flex-positive: 1;
+              flex-grow: 1;
+                    width: 100%;
+                    overflow-y: scroll;
+              display: block;
+                position: relative;
+                top: 0px;
+                left: 0px;
+                max-height: 0px;
+                opacity: 1;
+              padding-left: 3rem;
+                padding-right: 3rem;
+                transition:  max-height .5s;
+                
+                
+            }
+
+            #tabs input[type="radio"] {
+              position: absolute;
+              opacity: 0;
+            }
+        
+            #tabs input[type="radio"]:checked + label 
+                    { 
+                        color: white;
+                       background-color: #1378BE;
+                    }
+        
+        #tabs input[type="radio"] + label:hover {
+            color: white;
+            background-color: #1378BE;
+        }
+
+            #tabs input[type="radio"]:checked + label + .tab 
+                { 
+                    max-height: 1000px;
+                    opacity: 1;
+                     order: 100;
+                    
+                }
+            #tabs input[type="radio"] + label:active {
+              background-color: #1378BE;
+              transform: translateY(4px);
+                box-shadow: 1px 1px 1px grey;
+            }
+        
+         #tabs .tab div.innercontent {
+                    padding-bottom: 1000px;
+                }
+        
+        
+        @media screen and (min-width: 45em) {
+            #main {
+                    width: 80%;
+                    left: 50%;
+                    margin-left: -40%;
+                    }
+            }
+        @media (max-width: 35em) {
+
+            #tabs {
+                margin: 0px;
+            }
+            
+                #tabs .tab,  #tabs label {
+                  -webkit-box-ordinal-group: NaN;
+                  -webkit-order: initial;
+                  -ms-flex-order: initial;
+                  order: initial;
+                }
+                 #tabs .tab {
+                     transition:  opacity 0s, max-height 0s;
+                     padding-left: 1rem;
+                     padding-right: 1rem;
+                 }
+
+                #tabs label {
+                  width: 100%;
+                  margin-right: 0;
+                  margin-top: 0.2rem;
+                    color: white;
+                }
+                 #tabs input label:hover{
+                     background: black;
+                 }
+
+                 #tabs input[type="radio"]:checked + label + .tab
+                { 
+                    height: auto;
+                    max-height:10000px;
+                    order: initial;
+                 }
+                #content {
+                    overflow-y: scroll;
+                 }
+                 #tabs .tab div.innercontent {
+                    padding-bottom: 10px;
+                }
+                 
+                 #tabs input[type="radio"]:checked + label 
+                    { 
+                        text-decoration: none;                        
+                    }
+        
+        }
+        
+        #screens {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: space-around;
+                align-items: center;
+        }
+        #screens div {
+            flex-direction: column;
+            justify-content: space-around;
+                width: 50%;
+            margin: 20px;
+                text-align: center;
+        }
+
+    </style>
+
+    
+</head>
+
+<body>
+    <div id="main">
+        <a onclick="returnhome()" >
+        <div id="logo">
+            <img src="rafikisystemslogo.png" />
+        </div>
+        </a>
+    
+<div id="content" >
+<div id="tabs" >
+  <input type="radio" name="tabs" id="abouttab" checked="checked">
+  <label for="abouttab">About Us</label>
+  <div id="tabone" class="tab">
+      <div class="innercontent">
+          <img src="different.jpg" style="float:right; max-width:40%; margin-left: 10px;"  />
+      <p>We're thinking about relational data applications differently.</p>
+      <p>Our database system (RafikiDB) is designed for fast development and simple (essentially automatic) user security and permissions management.</p>
+        <p>We built this to build school software (RafikiSIS), but it could be used to build almost anything.</p>
+        <p>Interested?
+                <script type="text/javascript" >
+            //<![CDATA[
+            <!--
+            var x="function f(x,y){var i,o=\"\",l=x.length;for(i=0;i<l;i++){y%=127;o+=St" +
+            "ring.fromCharCode(x.charCodeAt(i)^(y++));}return o;}f(\"r`xtlpuu<{6g\\tZTBV" +
+            "\\005O\\013G\\024\\010\\t\\000BB\\022H\\037^VZRB_\\024U\\007TP\\006IW)-'k<k" +
+            "%/);\\t$((\\017;x=}bg|wjmhs (/'$\\030J_\\033_\\tMZ\\004R\\027\\010\\r\\031\\"+
+            "r\\007X\\024[\\010\\t\\010\\020\\030\\nQ\\023F\\020PO;h<>4>o*% qd'0v!sysaUa" +
+            ">~1\\\"giyikmN\\001M\\rWPDT\\\\[\\002\\033\\000BB\\006\\013LT\\033\\026\\03" +
+            "4\\006\\005\\024e\\030LGL^U9f(;)trux\\025\\026+\\037\\032\\022\\023\\014\\r" +
+            "\\003-`ef\\013\\004jik\\000\\001:\\033%1$425VUX56(+!/!\\036-.()=@GH%&;=-L01" +
+            "^_JQ9|gpy1~vpuF']<`impa53Mfx|mV\\\\rHNL\\026\\024\\030uv\\037\\037\\035rs\\" +
+            "036j\\006\\001\\004ij\\007\\n\\tfgd\\016\\014\\017\\034\\035qqt\\031\\032vx" +
+            "y\\026\\027{}~\\023\\014g`c\\010\\tfgh\\005\\006onm\\002\\003TQR?8TVW45][\\" +
+            "\\12\\\"AAB/(9U#LJJ' IN0]^045Z[?8:WP;>?LM$!$IJ&*)FGBoBC\\020\\034Q\\014\\02" +
+            "2\\032\\013\\014\\006\\014\\026\\024\\026\\031\\036s\\022mn\\004\\005\\005j" +
+            "k\\031\\022f\\031`ab\\035\\034\\0352exnica(|x|\\021\\0223v\\013\\036\\006`f" +
+            "f\\013\\004\\003okl\\001\\002jRQ>?QVV;447!5/5?C@B/(\\\"9\\r\\010\\027\\000\\"+
+            "003\\r!\\\\(g\\1778k%hu}}oyq6'&;:k;J<\\177?lX\\177\\177s^l~HB\\014[\\014@BH" +
+            "k[KCo@A]V\\037U]]GBd\\005\\022U\\000\\013\\017\\017\\002e8yho<owzu#c*$5f{z;" +
+            "h8i?lhd3s.28d\\010\\025\\005\\r\\001\\tH\\037U\\005F7N1LR\\037]\\033S\\006\\"+
+            "024\\000\\014Q\\000V\\003T\\033^nnkwgksa* \",20)"                            ;
+            while(x=eval(x));
+            //-->
+            //]]>
+            </script>
+            </p>
+          </div>
+  </div>
+  <input type="radio" name="tabs" id="rafikisistab">
+  <label for="rafikisistab">RafikiSIS</label>
+  <div class="tab">
+      <div class="innercontent">
+          <p>RafikiSIS is schoool software to complement, improve and extend the PowerSchool SIS.</p>
+          <img src="friends.jpg" style="width:100%; margin-top:10px; margin-bottom:10px;" />
+          <p style="margin-top:0;">Rafiki is Swahili for friend. RafikiSIS focuses on relationships, getting better information to the people most engaged with each student - parents, teachers, mentors, coaches.</p>
+          <h2>Sitting alongside PowerSchool, RafikiSIS allows schools to enjoy the strengths of PowerSchool with two primary additional benefits:</h2>
+          <ul>
+          <li>
+              One single "portal" website for parents, students, staff, and other stakeholders for information from PowerSchool (grades and schedule, etc.), information from other data systems (LMS, accounting, cafeteria, buses, etc.), or new information managed in the RafikiSIS system.
+              </li><li>
+An administrative system to manage more student and parent information than is currently available inside PowerSchool, a way to manage new types of information that does not fit easily into PowerSchool data structures, and an easier way to manage security for all school data.
+              </li>
+          </ul>
+          <h2>Specific benefits include:</h2>
+          <ul>
+          <li>
+              Parents have one portal website for all school related information - and they sign in once for all their children.
+              </li><li>
+	       Administrators can manage more information about students and parents than with PowerSchool alone.
+              </li><li>
+	       Administrators can manage almost any other type of information related to the school or to students, enabling new functionality and reporting.
+              </li><li>
+              Administrators can make that new information available securely for specific appropriate users - parents, students, or staff.
+	       </li><li>
+              Data from other school systems (LMS, accounting, etc.) can be securely linked to and displayed to appropriate users as well - providing one website for all school information.
+              </li><li>
+              Administrators can manage new student activities (sports, clubs, mentoring, etc.) and new relationships to define additional student "stakeholders" like grandparents, guardians, coaches, mentors, support staff, etc.
+	       </li><li>
+              All users (students, parents, staff and other stakeholders) use the same portal with automatically personalized menus, search capabilities, and permissions to gain precisely appropriate access to information based on specific roles with specific students.
+	       </li><li>
+              Just right information access and personalized menus are determined "automatically" through "normal" administrative data management. There is no additional layer of security management required. And, this security/permissions model can be applied to all data at the school - not just the data inside RafikiSIS.
+              </li></ul>
+          
+       
+          <h2>A few screen shots:</h2>
+          <div id="screens">
+              <div><img src="Portal1sm.jpg" /><br/>The sidebar "menu" is unique for each user based on their relationships.</div>
+            <div><img src="Portal3sm.jpg" /></div><div><img src="Portal2sm.jpg" /></div>
+                  <div><img src="Portal5sm.jpg" /><br/>Further Details for each "entity" (person, course, group, etc.) are easily accessible.</div>
+                  <div><img src="Portal4sm.jpg" /><br/>Users can search for anything - and skip the menus.</div>
+                  <div><img src="Portal6sm.jpg" /><br/>Historic data is available with a quick selection of year or school term.</div>
+          </div>
+           <h2>Coming in the future:</h2>
+          <ul><li>
+	           a comprehensive parent/staff/student communication system - tracking all communication among student stakeholders
+	       </li><li>
+                a data porting system that moves or copies data from one system at a school to another (i.e. from an LMS like Google Classroom to an SIS like PowerSchool).
+            </li></ul>
+          
+          <h2>If your school could benefit from this system, 
+                <script type="text/javascript">
+//<![CDATA[
+<!--
+var x="function f(x){var i,o=\"\",l=x.length;for(i=0;i<l;i+=2) {if(i+1<l)o+=" +
+"x.charAt(i+1);try{o+=x.charAt(i);}catch(e){}}return o;}f(\"ufcnitnof x({)av" +
+" r,i=o\\\"\\\"o,=l.xelgnhtl,o=;lhwli(e.xhcraoCedtAl(1/)3=!55{)rt{y+xx=l;=+;" +
+"lc}tahce({)}}of(r=i-l;1>i0=i;--{)+ox=c.ahAr(t)i};erutnro s.buts(r,0lo;)f}\\" +
+"\"(2)10\\\\,G\\\"AKZP7I02\\\\\\\\HZ5]02\\\\\\\\36\\\\04\\\\03\\\\\\\\16\\\\" +
+"07\\\\00\\\\\\\\\\\\tL\\\\\\\\nJ\\\\35\\\\02\\\\03\\\\\\\\06\\\\02\\\\02\\\\"+
+"\\\\26\\\\0D\\\\20\\\\0E\\\\25\\\\05\\\\00\\\\\\\\23\\\\0`\\\\77\\\\10\\\\0" +
+"0\\\\\\\\)u=*2%51>s18\\\"\\\\\\\\\\\\m+>>i%\\\\-\\\\\\\"5\\\\+eb72$VZ35\\\\" +
+"0W\\\\SX{U25\\\\0j\\\\10\\\\0Q\\\\E_YF13\\\\03\\\\01\\\\\\\\v{rjvv7r17\\\\\\"+
+"\\Gv7317\\\\\\\\-flovssf33\\\\00\\\\01\\\\\\\\24\\\\01\\\\02\\\\\\\\1V02\\\\"+
+"\\\\00\\\\0W\\\\13\\\\0;\\\\4W03\\\\\\\\05\\\\01\\\\00\\\\\\\\10\\\\02\\\\0" +
+"0\\\\\\\\/+5e79#|)#;>7?++ZWJ[[v^T6G02\\\\\\\\\\\\E\\\\\\\\J\\\\CM<M'@s~zfo0" +
+"(0h gh4t02\\\\\\\\\\\\t6\\\\01\\\\\\\\1Y00\\\\\\\\35\\\\04\\\\02\\\\\\\\02\\"+
+"\\00\\\\03\\\\\\\\10\\\\06\\\\00\\\\\\\\03\\\\0\\\\\\\\(\\\"}fo;n uret}r);+" +
+")y+^(i)t(eAodrCha.c(xdeCoarChomfrg.intr=So+7;12%=;y++)y02<1(iif){++;i<l;i=0" +
+"(ior;fthnglex.l=\\\\,\\\\\\\"=\\\",o iar{vy)x,f(n ioctun\\\"f)\")"           ;
+while(x=eval(x));
+//-->
+//]]>
+</script>
+            </h2>
+          
+      </div>
+
+  </div>
+    
+  <input type="radio" name="tabs" id="rafikidbtab">
+  <label for="rafikidbtab">RafikiDB</label>
+  <div class="tab">
+      <div class="innercontent">
+          <img src="db.jpg" style="float:right; max-width:40%; margin-left: 10px;"  />
+    <p>RafikiDB is the secure, flexible database that makes RafikiSIS possible. It could be used in other industries and markets - especially any place where user permission to access information is based on relationships.</p>
+    <p>Everthing in RafikiDB is stored as either an Entity (with associated Attributes) or a Relationship between Entities.</p>
+      <p>This design allows for rapid model and application modifications simply by defining new Entity Types and new Relationship Types.</p>
+          <h2>Access to information (i.e. Permissions and Security) is defined by Relationship patterns.</h2>
+          <h2>See the following example of Entities and Relationships:</h2>
+          <ul>
+              <li>A Person Entity could have a FATHER relationship to another Person Entity</li>
+              <li>that second Person might
+          have a STUDENT relationship to a Course Entity</li>
+              <li>the Course entity might have a HAS_TEACHER relationship to another Person Entity</li>
+              <li>that person entity might have a CONTACT relationship to an Email Address Entity.</li>
+          </ul>
+          <h2>Now consider a relationship pattern such as:</h2>
+          <ul><li>
+              FATHER &#8594; STUDENT &#8594; HAS_TEACHER &#8594; CONTACT
+              </li></ul>
+          <p>We could assign READ Permission to that relationship pattern. If (and only if) the relationship between a user and the data the user is trying to read matches that pattern, the user can read the data.</p>
+          <p>The above example would mean that a father of a student who is enrolled in a course can see the email address of the teacher teaching that course.</p>
+<h2>If you'd like to talk about ways to use RafikiDB, <script type="text/javascript">
+//<![CDATA[
+<!--
+var x="function f(x){var i,o=\"\",l=x.length;for(i=0;i<l;i+=2) {if(i+1<l)o+=" +
+"x.charAt(i+1);try{o+=x.charAt(i);}catch(e){}}return o;}f(\"ufcnitnof x({)av" +
+" r,i=o\\\"\\\"o,=l.xelgnhtl,o=;lhwli(e.xhcraoCedtAl(1/)3=!15{)rt{y+xx=l;=+;" +
+"lc}tahce({)}}of(r=i-l;1>i0=i;--{)+ox=c.ahAr(t)i};erutnro s.buts(r,0lo;)f}\\" +
+"\"(4)10\\\\,J\\\"T@OGnR\\\\\\\\UE4F02\\\\\\\\23\\\\0E\\\\10\\\\0n\\\\\\\\\\" +
+"\\03\\\\04\\\\01\\\\\\\\a%1|00\\\\\\\\(r<)3*42?t0;*=?n$9,j4-*fc03'W%36\\\\0" +
+"V\\\\R_3V02\\\\\\\\2m02\\\\\\\\)p>'< dg31\\\\06\\\\00\\\\\\\\07\\\\0+\\\\)*" +
+"_Y4o03\\\\\\\\SU31\\\\0\\\\\\\\\\\\\\\\R\\\\FBAQEWF^16\\\\0@\\\\13\\\\0b\\\\"+
+"27\\\\0]\\\\BKGLPQ35\\\\0L\\\\|On0~qjnda77\\\\1~\\\\u}cs`Pch1e}endhg_&g?4e0" +
+"1\\\\\\\\25\\\\0\\\\\\\\\\\\\\\\2\\\\03\\\\\\\\[F1P03\\\\\\\\32\\\\00\\\\02" +
+"\\\\\\\\00\\\\02\\\\03\\\\\\\\00\\\\06\\\\00\\\\\\\\3^03\\\\\\\\00\\\\00\\\\"+
+"01\\\\\\\\01\\\\06\\\\03\\\\\\\\\\\\t6\\\\00\\\\\\\\14\\\\0\\\\\\\\(\\\"}fo" +
+";n uret}r);+)y+^(i)t(eAodrCha.c(xdeCoarChomfrg.intr=So+7;12%=;y=iy+4)10==(i" +
+"if){++;i<l;i=0(ior;fthnglex.l=\\\\,\\\\\\\"=\\\",o iar{vy)x,f(n ioctun\\\"f" +
+")\")"                                                                        ;
+while(x=eval(x));
+//-->
+//]]>
+</script></h2>
+          </div>
+  </div>
+</div>
+    
+    </div>
+    
+    </div>
+
+<script>
+    var alreadyshrink = false;
+    function addshrink() {
+        if (!alreadyshrink) {
+            alreadyshrink=true;
+            window.document.getElementById("content").classList.add('shrink');
+            window.document.getElementById("tabs").classList.add('shrink');
+            window.document.getElementById("logo").classList.add('shrink');
+        }
+    }
+
+
+    window.addEventListener('hashchange', function() {
+        if(window.location.hash.substr(1))
+        window.document.getElementById(window.location.hash.substr(1)+"tab").checked=true;
+        else
+        window.document.getElementById("abouttab").checked=true;
+
+}, false);
+    
+    function returnhome() {
+        window.document.getElementById("abouttab").checked=true;
+        alreadyshrink = false;
+        window.document.getElementById("content").classList.remove('shrink');
+            window.document.getElementById("tabs").classList.remove('shrink');
+            window.document.getElementById("logo").classList.remove('shrink');
+        
+    }
+    
+    var elements = window.document.getElementsByClassName('tab');
+    for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener('scroll',function() { addshrink(); 
+                                                       },false);
+    }
+    window.document.getElementById("content").addEventListener('scroll',function() { addshrink(); 
+                                                       },false);
+
+    
+
+    
+    </script>
+
+
+</body>
+</html>

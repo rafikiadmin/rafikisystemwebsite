@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name='viewport'
+      content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#ffc40d">
+<meta name="theme-color" content="#ffffff">
+    
+    <title>Jon Stocksdale</title>
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+            font-size: 100%;
+            font-family: Arial;
+    
+        }
+    
+        body,
+        html {
+            background: #1378BE;
+            width: 100%;
+            height: 100%;
+        }
+    
+        #main {
+            position: fixed;
+            width: 100%;
+            left: 50%;
+            margin:0px;
+            padding:0px;
+            top: 0px;
+            margin-left: -50%;
+            font-size: 1.5em;
+            background: #EEE;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0px 0px 100px rgb(0, 0, 0, .2);
+        }
+    
+        #content.shrink {
+            position: absolute;
+            top: 10%;
+            left: 0%;
+            height: 90%;
+        }
+    
+        #content {
+            position: absolute;
+            top: 20%;
+            left: 0%;
+            height: 80%;
+            width: 100%;
+            transition: top .3s;
+        }
+    
+        #logo.shrink {
+            max-height: 10%;
+            height: 10%;
+            width: 100%;
+            background: #EEE;
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+    
+        }
+    
+        #logo {
+            top:0px;
+            left:0px;
+            max-height: 20%;
+            height: 20%;
+            width: 100%;
+            background: #EEE;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content:start;
+            transition: max-height .3s;
+        }
+    
+        #logo img {
+            max-height: 105%;
+            width: auto;
+            margin: auto;
+            transition: max-height .3s;
+            max-width: 100%;
+        }
+    
+
+    
+        p,
+        h2 {
+            margin-top: 1em;
+        }
+    
+        li {
+            margin-left: 2em;
+        }
+    
+        #tabs {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 4px;
+    
+        }
+    
+        #tabs.shrink label {
+            padding: 0;
+        }
+    
+        #tabs label {
+            -webkit-box-ordinal-group: 2;
+            -webkit-order: 1;
+            -ms-flex-order: 1;
+            order: 1;
+            display: block;
+            margin: 3px;
+            box-shadow: 5px 5px 8px rgb(0, 0, 0, .2);
+            padding: 1rem;
+            flex-grow: 1;
+            text-align: center;
+            cursor: pointer;
+            background: black;
+            color: grey;
+            font-weight: bold;
+            -webkit-transition: background ease 0.2s;
+            transition: transform ease 0.2s, box-shadow ease .2s;
+        }
+
+        #innertabs label {
+            background: darkgrey;
+            color: black;
+        }
+    
+        #tabs .tab {
+            -webkit-box-ordinal-group: 100;
+            -webkit-order: 99;
+            -ms-flex-order: 99;
+            order: 99;
+            -webkit-box-flex: 1;
+            -webkit-flex-grow: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            width: 100%;
+            overflow-y: scroll;
+            display: block;
+            position: relative;
+            top: 0px;
+            left: 0px;
+            max-height: 0px;
+            opacity: 1;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            transition: max-height .5s;
+    
+    
+        }
+
+        dd, li {
+            margin-bottom: .5em;
+        }
+        dd li {
+            margin-bottom: 0;
+        }
+    
+        #tabs input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+    
+        #tabs input[type="radio"]:checked+label {
+            color: white;
+            background-color: #1378BE;
+        }
+    
+        #tabs input[type="radio"]+label:hover {
+            color: white;
+            background-color: #1378BE;
+        }
+    
+        #tabs input[type="radio"]:checked+label+.tab {
+            max-height: 1000px;
+            opacity: 1;
+            order: 100;
+    
+        }
+    
+        #tabs input[type="radio"]+label:active {
+            background-color: #1378BE;
+            transform: translateY(4px);
+            box-shadow: 1px 1px 1px grey;
+        }
+    
+        #tabs .tab div.innercontent {
+            padding-bottom: 1000px;
+        }
+    
+    
+        @media screen and (min-width: 36em) {
+            #main {
+                width: 80%;
+                left: 50%;
+                margin-left: -40%;
+            }
+        }
+    
+        @media (max-width: 35em) {
+
+
+            #tabs {
+                margin: 0px;
+            }
+    
+            #tabs .tab,
+            #tabs label {
+                -webkit-box-ordinal-group: NaN;
+                -webkit-order: initial;
+                -ms-flex-order: initial;
+                order: initial;
+            }
+    
+            #tabs .tab {
+                transition: opacity 0s, max-height 0s;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+    
+            #tabs label {
+                width: 100%;
+                margin-right: 0;
+                margin-top: 0.2rem;
+                color: white;
+            }
+            #innertabs label {
+            background: darkgrey;
+            color: black;
+        }
+    
+            #tabs input label:hover {
+                background: black;
+            }
+    
+            #tabs input[type="radio"]:checked+label+.tab {
+                height: auto;
+                max-height: 10000px;
+                order: initial;
+            }
+    
+            #content {
+                overflow-y: scroll;
+            }
+    
+            #tabs .tab div.innercontent {
+                padding-bottom: 10px;
+            }
+    
+            #tabs input[type="radio"]:checked+label {
+                text-decoration: none;
+            }
+    
+        }
+    
+        #screens {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+        }
+    
+        #screens div {
+            flex-direction: column;
+            justify-content: space-around;
+            width: 50%;
+            margin: 20px;
+            text-align: center;
+        }
+
+        dt {
+            font-size: 1em;
+            font-weight: bold;
+        }
+        dd {
+            margin-left: 10%;
+        }
+        ul.vision li {
+            list-style-type: none;
+        }
+    </style>
+
+    
+</head>
+
+<body>
+    <div id="main"> 
+        <a onclick="returnhome()" href="#">
+            <div id="logo">
+                <img src="jonlogo.png" />
+            </div>
+        </a>
+    
+        <div id="content">
+            <div id="tabs">
+                <input type="radio" name="tabs" id="visiontab" checked="checked">
+                <label for="visiontab">Vision</label>
+                <div id="tabone" class="tab">
+                    <div class="innercontent">
+                        <p>
+                            <strong>
+                                Database and Software Architect/Designer/Developer, Educator, Psychologist,  Entrepreneur
+                            </strong>
+                        </p>
+                        <p style="font-style: italic">
+                            Compassionate, Visionary, Creative, Hard‐working, Learner, best at big picture tasks but willing to do almost anything to make a project succeed. 
+                                
+                        </p>
+                        <p>
+                        <ul class="vision">
+<li>I love designing and creating technology solutions - especially better organizing data for efficiency and decision-making.</li>
+<li>I love teaching - especially helping people think better and deeper.</li>
+<li>I love research and analysis - especially identifying the most important questions.</li>
+
+                        <!-- <li>As an entrepreneurial Educator/Psychologist and Software/Database Developer with extensive international 
+                            experience, I am using my unique background, innovative thinking and understanding of people, technology and data to improve 
+                            schools, businesses, and non‐profits.
+                        </li>
+                        <li>With a strong understanding of data and data structures and a background in both mathematics and psychology, I enjoy research, statistics, and especially understanding why people do what they do.
+                        </li>
+                        <li>I love teaching, especially seeing students think deeper and better. I love data analysis, especially seeing people ask the right questions. I love writing software, especially when technology is used appropriately.
+                        </li> -->
+                        <li>I think globally and I care deeply about the environment, education, and economic and racial equity. 
+                        </li><li>I seek situations to use my unusual mix of skills and experiences, but mostly I want to do things that improve our world.
+                        </li>
+                        </ul>
+                    </p>
+                    </div>
+                </div>
+                <input type="radio" name="tabs" id="skillstab">
+                <label for="skillstab">Skills</label>
+                <div class="tab">
+                    <div class="innercontent">
+                        <p>With years of mixed work in the fields of education, IT, research and psychology, I have grouped my skills into broad categories: </p>
+                        <p> </p>
+                        <div id="innertabs">
+                            <input type="radio" name="innertabs" id="dataanTab">
+                            <label for="dataanTab">Data Architecture and Analysis</label>
+                            <div class="tab">
+                                <div class="innercontent2">
+                                        <ul>
+                                            <li>
+                                                Adept designer of Relational Databases, especially creative data organziation for better applications, analysis, and decision-making.</li>
+                                                <li>Designed unique generic solution: “Graph” Database linked to traditional SQL Relational Databases with security implemented through relationship patterns</li>
+                                                <li>Energized by statistical analysis, especially identifying essential research questions.</li>
+                                                <li>Fluent in a wide range of tools, software, and languages, especially SQL, and especially Microsoft tools
+                                                <li>Primary interviewer for SQL Architect/Developer hiring for large data driven company </li>
+                                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <input type="radio" name="innertabs" id="programmingtab">
+                            <label for="programmingtab">Programming/Software Development</label>
+                            <div class="tab">
+                                <div class="innercontent2">
+                                    <ul>
+                                        <li>
+                                             Programming, design and development with numerous languages and technologies
+                                        </li>
+                                        <li>
+                                                Especially comfortable with SQL, Elixir, Javascript, C#, Dart, Python, HTML, CSS, REACT, Angular                                               
+                                        </li>
+                                        <li> Designed and developed secure, flexible web-based school management system
+                                            </li><li>Comfortable with both front and back end development
+                                            </li><li>Enjoy designing solutions based on solid understanding of user informational and 
+                                            process needs</li>                           </ul>
+                                </div>
+                            </div>
+                            <input type="radio" name="innertabs" id="teachingtab">
+                            <label for="teachingtab">Education and Curriculum Development</label>
+                            <div class="tab">
+                                <div class="innercontent2">
+                                        <ul>
+                                                <li>
+                                                        Primary, secondary, and tertiary teaching, including: 
+                                        <ul>
+                                                <li>Computer/technology courses (Computer Science, Web Development – HTML, CSS, Javascript, MS Office, Design/Visual Communications especially Adobe Products – Photoshop, InDesign, Illustrator)
+
+                                                </li>
+                                                    <li>Social Sciences (Psychology, Current World Issues, Government/Economics, MUN)</li>
+                                                        <li>Mathematics (Algebra 1, 2, Pre-Calculus, Middle School)</li>
+                                                        </ul>
+                                    </li>
+                                    <li>Academic Support (K-12): Tutoring, Mentoring, Advising, Guidance Counseling
+                                        </li>
+                                        <li>Curriculum Development: Communications and Information Technology courses, Current World Issues course, and Psychology course
+
+                                        </li>
+                                            <li>Vision/Concern for appropriate use of educational technology and struggling students
+                                                </li>
+                                                <li>Mentoring under-represented groups in Elixir functional programming curriculum
+                                                </li>
+                                        </ul>
+                                </div>
+                            </div>
+                            
+                            <input type="radio" name="innertabs" id="techTab">
+                            <label for="techTab">Technology Implementer</label>
+                            <div class="tab">
+                                <div class="innercontent2">
+                                        <ul>
+                                                <li>Deployed various technologies for budget-concious schools and businesses
+                                                    <li>Envisioned, influenced decision-makers, deployed, and managed “one-to-one” student tablet computer program before it was common
+                                                    </ul>
+                                </div>
+                            </div>
+                            <input type="radio" name="innertabs" id="innoTab">
+                            <label for="innoTab">Entrepreneur/Innovator</label>
+                            <div class="tab">
+                                <div class="innercontent2">
+                                        <ul>
+                                                <li>Started or contributed to the start of various businesses, ministries, and departments</li><li>Encouraged new ways of doing and thinking in established organizations
+</li>
+                                                </ul>
+                                </div>
+                            </div>
+                            <input type="radio" name="innertabs" id="technologiesTab">
+                            <label for="technologiesTab">Specific Technologies</label>
+                            <div class="tab">
+                                <div class="innercontent2">
+                                        <p>
+                                                The following are languages and technologies that I have either used in
+                                                production and/or have taught others to use:
+                                            </p>
+                                            <ul>
+                                                <li>
+                                                    SQL (especially MS SQL Server)
+                                                </li>
+                                                <li>
+                                                    SSMS
+                                                </li>
+                                                <li>
+                                                    Elixir (especially Phoenix LiveView)
+                                                </li>
+                                                <li>
+                                                    Javascript
+                                                </li>
+                                                <li>
+                                                    HTML
+                                                </li>
+                                                <li>
+                                                    CSS/SCSS
+                                                </li>
+                                                <li>
+                                                    C#/ASP.NET/VS etc.
+                                                </li>
+                                                <li>
+                                                    RedGate SQL tools
+                                                </li>
+                                                <li>
+                                                    Adobe Tools (Photoshop, Illustrator, InDesign)
+                                                </li>
+                                                <li>
+                                                    Python
+                                                </li>
+                                                <li>
+                                                    Dart
+                                                </li>
+                                                <li>
+                                                    C++
+                                                </li>
+                                                <li>
+                                                    Java
+                                                </li>
+                                            </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+    
+                <input type="radio" name="tabs" id="experiencetab">
+                <label for="experiencetab">Experience</label>
+                <div class="tab">
+                        <div class="innercontent">
+                            <p> </p> 
+                                <dl> <dt>
+                                    USXPRESS – Chattanooga, TN       	  [   	Sep 2019 – Present ]
+                            </dt>
+                            <dd>
+                                Data Architect / SQL database design and development</dd><dd>
+                                Creation and improvement of Stored Procedures for dozens of databases</dd><dd>
+                                Design and redesign of data solutions for increasingly data oriented company</dd><dd>
+                                Manage (and hire) SQL, BizTalk, and Informatica developers to improve systems and connectivity</dd>
+                                
+
+                                        <dt>
+                                                RAFIKI SYSTEMS – Chattanooga, TN    [   	2016 – Present ]
+                                        </dt>
+                                        <dd>
+                                                Designed "graph"-like SQL Server database for secure and efficient access to both new 
+                                                and legacy data - for schools and other industries.
+                                            </dd>
+                                            <dd>
+                                                Contractual Database and Software Development for client companies.
+                                            </dd>
+                                        <dt>
+                                                HAMILTON COUNTY DEPT OF EDUCATION [	Jan 2019 – Aug 2019 ]
+                                        </dt>
+                                        <dd>
+                                                Math teacher (Algebra 1 and 2) for struggling or failing students (Soddy Daisy H.S.)
+                                        </dd>
+                                        <dt>
+                                                RIFT VALLEY ACADEMY – Kijabe, Kenya (East Africa)	[ 1990 – 2018 ]
+                                        </dt>
+                                        <dd>Administration (Guidance, Academic Support Coordinator, Department Head, Systems Administrator, Technology Coodinator, other “Get Stuff Done” roles)
+                                        </dd><dd>Teaching (Psychology, Computer Science, Economics/Current World Issues, Mathematics)
+                                        </dd><dd>Software/Database Development and Administration (SQL Server, Oracle, MS Access, Excel, Moodle, PowerSchool, Navision, Naviance, using SQL, C#/ASP.NET, VB, VBA)
+                                        </dd>
+                                            
+                                        <dt>
+                                                COMPUTER HORIZONS – Chattanooga, TN	[ 1997 – 1998 ]
+                                        </dt>
+                                        <dd>
+                                                Consultant/Software Developer (Access and SQL Server databases) for BCBST
+                                        </dd>
+                                        <dt>
+                                                GEORGIA DUCK AND CORDAGE MILL – Atlanta, GA   [  	1991 – 1994 ]
+                                        </dt>
+                                        <dd>
+                                                Consultant/Software Developer (Visual Basic, Progress, MFGPRO, Paradox, SQL)                                  </dd>
+                                        <dt>
+                                                GEORGIA ASSESSMENT PROJECT – Atlanta, GA     [	1991 ]
+                                        </dt>
+                                        <dd>
+                                                Testing data and question editing
+                                        </dd>
+                                        <dt>BEN & JERRY’S OF INDIANA – Indianapolis, IN      [      	1989 - 1990 ]
+                                            </dt>
+                                            <dd>Management and Point of Sale Implementation
+                                                </dd>
+                                        <dt>
+                                                INSTRUCTIONAL COMPUTER EQUIPMENT – Indianapolis, IN     [  	1983 - 1988 ]
+                                        </dt>
+                                        <dd>
+                                                Software Developer (C) – developed graphics editor (pre-Photoshop) used by Herron School of Art, and web-like (pre-web) tools to create interactive curriculum
+                                        </dd>
+                                        <dt>
+                                                BATTENBERG AND ASSOCIATES – Indianapolis, IN      [    	1984 - 1988 ]
+                                        </dt>
+                                        <dd>
+                                                Business and Education Technology Consulting and Development (various technologies)
+                                        </dd>
+                                        <dt>
+                                                TAYLOR UNIVERSITY – Upland, IN          [              	1981 - 1983 ]
+                                        </dt>
+                                        <dd>
+                                                Student Information System development for Taylor University and Marion College
+                                        </dd>
+                                        <dt>
+                                                INDIANA VOCATIONAL AND TECHNICAL COLLEGE – Marion, IN      [	1982 - 1983 ]
+                                        </dt>
+                                        <dd>
+                                                Instructor – Introduction to Computer Science and Programming
+                                        </dd>
+                                            </dl>
+
+    
+                    </div>
+                </div>
+                <input type="radio" name="tabs" id="edtab">
+                <label for="edtab">Education</label>
+                    <div class="tab">
+                    <div class="innercontent">
+                            <p> </p>
+                        <dl>
+                            <dt>
+                                    GEORGIA STATE UNIVERSITY – Atlanta, GA	[1994]
+                            </dt>
+                            <dd>
+                                    MS Educational Psychology
+                            </dd>
+                            <dt>
+                                    INDIANA UNIVERSITY – Indianapolis, IN	[1990]
+                            </dt>
+                            <dd>
+                                    Teaching Certification (Mathematics 5-12)
+                            </dd>
+                            <dt>
+                                    CHRISTIAN THEOLOGICAL SEMINARY – Indianapolis, IN       	[1985]
+                            </dt>
+                            <dd>
+                                    Bible and Psychology
+                            </dd>
+                            <dt>
+                                    TAYLOR UNIVERSITY – Upland, IN       	[1983]
+                            </dt>
+                            <dd>
+                                    BA Mathematics, Psychology (minors: Computer Science, Political Science)
+                            </dd>
+                            
+                        </dl>
+
+                            
+                    </div>
+                </div>
+                
+                <input type="radio" name="tabs" id="lifetab">
+                <label for="lifetab">Life</label>
+                <div class="tab">
+                    <div class="innercontent">
+                            <p> </p>
+                        <ul>
+                            <li> 30 YEARS LIVING/WORKING IN AFRICA
+                            </li>
+                            <li>MARRIED TO SUSAN SINCE 1991, 2 KIDS, 19 AND 21, 2 DOGS
+                            </li>
+                            <li>HOBBIES INCLUDE PHOTOGRAPHY, BIKIING, HIKING, COFFEE ROASTING, WOOD WORK, READING, LEARNING, TRAVEL
+                            </li>
+                            <li>EXTENSIVE TRAVEL BY BICYCLE THROUGH US, EUROPE, AFRICA, 25+ COUNTRIES
+                            </li>
+                            <li>VOLUNTEER TUTORING, ESL TEACHING, ROBOTICS CLUB, BIBLE CLUB, BUILDING, RELIEF, SURVEYING, FOOD PANTRY
+                            </li>
+                            <li>GENERAL CONTRACTOR FOR OWN HOME IN KENYA
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <input type="radio" name="tabs" id="linktab">
+                <label for="linktab">Links</label>
+                <div class="tab">
+                    <div class="innercontent">
+                        <p> </p>
+                            <ul><li>
+                                    Email: 
+                                    <script type="text/javascript">
+                                        //<![CDATA[
+                                        <!--
+                                        var x="function f(x){var i,o=\"\",ol=x.length,l=ol;while(x.charCodeAt(l/13)!" +
+                                        "=48){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o" +
+                                        ".substr(0,ol);}f(\")33,\\\"300\\\\700\\\\r\\\\430\\\\620\\\\r\\\\S630\\\\41" +
+                                        "0\\\\BAN200\\\\GCHE@f@HBFRK|qioq$;D9sx4771\\\\{p}j.bx+ajakE'X>gmt720\\\\t\\" +
+                                        "\\\\\\\\\\Y&420\\\\720\\\\420\\\\X130\\\\530\\\\220\\\\730\\\\620\\\\0n\\\\" +
+                                        "200\\\\410\\\\010\\\\030\\\\100\\\\n\\\\700\\\\320\\\\520\\\\710\\\\^410\\\\"+
+                                        "5,V_P630\\\\g700\\\\_]E^520\\\\U710\\\\020\\\\130\\\\^CKYEY]700\\\\\\\\\\\\" +
+                                        "ICHQ@ME\\\"(f};o nruter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o;721=" +
+                                        "%y;i=+y)33==i(fi{)++i;l<i;0=i(rof;htgnel.x=l,\\\"\\\"=o,i rav{)y,x(f noitcn" +
+                                        "uf\")"                                                                       ;
+                                        while(x=eval(x));
+                                        //-->
+                                        //]]>
+                                        </script>
+                                        
+                                </li><li>
+                                        Phone: 423-598-6212
+                                    </li><li>
+                                        Address: 458 Glenhill Drive, Red Bank, TN 37415
+                                        </li><li>
+                                    <a href="https://www.linkedin.com/in/jonstocksdale/">LinkedIn</a>
+                                        </li><li>
+                                    <a href="http://rafikisystems.com">Company (Rafiki Systems)</a>
+                                    </li><li>
+                                    <a href="https://stocksdale.aimsites.org/">Our work in Kenya</a>
+                                </li><li>
+                                    <a href="https://rafiki-systems.gitbooks.io/rafiki-systems-documentation/">GitBook documentation for RafikiSIS</a>
+                                </li><li>
+                                    <a href="https://github.com/RafikiAdmin/rafikisis">GitHub Repository for RafikiSIS (PRIVATE: Ask for permission to see.)
+                                    </a>
+                                </li><li>
+                                    Refences available upon request.    
+                                </li>
+                                    </ul>
+                    </div>
+                </div>
+                <input type="radio" name="tabs" id="pdftab">
+                <label for="pdftab">PDF</label>
+                <div class="tab">
+                    <div class="innercontent">
+                        <p>If the PDF is not embeded below, click here:<a href="stocksdale_resume.pdf">rafikisystems.com/stocksdale/stocksdale_resume.pdf</a></p>
+                            <embed src="stocksdale_resume.pdf" type="application/pdf" width="100%" height="600px"  />
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+
+    <script>
+        var alreadyshrink = false;
+        function addshrink() {
+            if (!alreadyshrink) {
+                alreadyshrink = true;
+                window.document.getElementById("content").classList.add('shrink');
+                window.document.getElementById("tabs").classList.add('shrink');
+                window.document.getElementById("innertabs").classList.add('shrink');
+                window.document.getElementById("logo").classList.add('shrink');
+            }
+        }
+
+
+        window.addEventListener('hashchange', function () {
+            if (window.location.hash.substr(1)) {
+                window.document.getElementById(window.location.hash.substr(1) + "tab").checked = true;
+                addshrink();
+            }
+            else
+                window.document.getElementById("visiontab").checked = true;
+
+        }, false);
+
+        function returnhome() {
+            window.document.getElementById("visiontab").checked = true;
+            alreadyshrink = false;
+            window.document.getElementById("content").classList.remove('shrink');
+            window.document.getElementById("tabs").classList.remove('shrink');
+            window.document.getElementById("innertabs").classList.add('shrink');
+            window.document.getElementById("logo").classList.remove('shrink');
+
+        }
+
+/*         var elements = window.document.querySelectorAll('input');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener('click', function () {
+                addshrink();
+            }, false);
+        } */
+
+        var elements = window.document.getElementsByClassName('tab');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener('scroll', function () {
+                addshrink();
+            }, false);
+
+        }
+        window.document.getElementById("content").addEventListener('scroll', function () {
+            addshrink();
+        }, false);
+
+
+
+
+    </script>
+
+
+</body>
+</html>
